@@ -46,7 +46,17 @@ public class FXMLController {
     @FXML
     void doTranslate(ActionEvent event) {
     	String testoInserito = this.txtParola.getText();
-    	model.inserisciNelTraduttoreOTraduci(testoInserito);
+    	//controllo spazi
+    	if(model.contaSpazi(testoInserito)>1) {
+    		this.txtAreaCentrale.setText("Non inserire più di uno spazio!");
+    		return;
+    	}
+    	//controllo che non contenga numeri 
+    	if(model.contieneNumeri(testoInserito)==true) {
+    		this.txtAreaCentrale.setText("Non inserire numeri!");
+    		return;
+    	}
+    	//se sono qui tutto a posto
     	this.txtAreaCentrale.setText(model.inserisciNelTraduttoreOTraduci(testoInserito).toString());
     }
 
